@@ -131,6 +131,7 @@ def obtener_bloques(columnas):
         "Variables estadísticas",
         "Estadísticas",
         [
+            "tiempo_permanencia_cliente",
             "acum_tiempo_permanencia",
             "contador_clientes_salieron",
             "tiempo_promedio_permanencia",

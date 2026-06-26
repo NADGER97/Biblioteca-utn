@@ -285,6 +285,7 @@ class InterfazBiblioteca:
 
             "tiempo_transcurrido": 210,
             "cant_personas_promedio": 210,
+            "tiempo_permanencia_cliente": 210,
             "promedio_permanencia": 220,
             "ac_ocio_empleado_1": 190,
             "ac_ocio_empleado_2": 190,
@@ -337,6 +338,7 @@ class InterfazBiblioteca:
                 color = "#DDEBF7"
 
             elif columna in [
+                "tiempo_permanencia_cliente",
                 "acum_tiempo_permanencia",
                 "contador_clientes_salieron",
                 "tiempo_promedio_permanencia",

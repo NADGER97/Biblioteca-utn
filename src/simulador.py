@@ -49,6 +49,7 @@ class SimuladorBiblioteca:
         # Variables estadísticas asíncronas
         self.acum_tiempo_permanencia = 0.0
         self.contador_clientes_salieron = 0
+        self.ultimo_tiempo_permanencia = None
 
         # Para guardar SOLO el tramo pedido
         self.hora_desde = parametros["hora_desde"]
@@ -156,6 +157,7 @@ class SimuladorBiblioteca:
 
         # --- CÁLCULO ASÍNCRONO DE PERMANENCIA ---
         tiempo_permanencia = self.hora_actual - persona.hora_llegada
+        self.ultimo_tiempo_permanencia = tiempo_permanencia
         self.acum_tiempo_permanencia += tiempo_permanencia
         self.contador_clientes_salieron += 1
 
@@ -193,6 +195,9 @@ class SimuladorBiblioteca:
         promedio_permanencia = 0.0
         if self.contador_clientes_salieron > 0:
             promedio_permanencia = self.acum_tiempo_permanencia / self.contador_clientes_salieron
+
+        tiempo_permanencia_cliente = self.ultimo_tiempo_permanencia
+        self.ultimo_tiempo_permanencia = None
 
         fila_estado = {
             "fila": numero_fila,
@@ -266,6 +271,11 @@ class SimuladorBiblioteca:
             "estado_biblioteca": self.obtener_estado_biblioteca(),
 
             # Variables estadísticas
+            "tiempo_permanencia_cliente": (
+                round(tiempo_permanencia_cliente, 2)
+                if tiempo_permanencia_cliente is not None
+                else "-"
+            ),
             "acum_tiempo_permanencia": round(self.acum_tiempo_permanencia, 2),
             "contador_clientes_salieron": self.contador_clientes_salieron,
             "tiempo_promedio_permanencia": round(promedio_permanencia, 2),
